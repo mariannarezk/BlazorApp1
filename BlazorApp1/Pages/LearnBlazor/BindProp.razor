@@ -1,0 +1,58 @@
+﻿@page "/learnBlazor/bindProp"
+<h2 class="text-success">Individual Project</h2>
+<div class="row">
+<div class="col-6 border p-3">
+    <h3>Product Playground</h3><hr />
+    <div>
+    Price :
+    <input type="number" @bind="@product.Price" @bind:event="oninput" />
+    </div>
+    <div>
+    Active :
+    <input type="checkbox" @bind="@product.IsActive" @bind:event="oninput" />
+    </div>
+    <div>
+    Product Properties:
+    <select @bind="selectedProp">
+        @foreach (var prop in product.ProductProperties)
+        {
+            <option value="@prop.Key">@prop.Key</option>
+        }
+    </select>
+    </div>
+</div>
+<div class="col-6 border p-3">
+<h3>Product Summary</h3><hr />
+Name @product.Name <br />
+IsActive @product.IsActive <br />
+Price : @product.Price <br />
+ The product @(product.IsActive ? "Active" : "Inactive") <br />
+    <br />
+    @if (!String.IsNullOrWhiteSpace(selectedProp))
+    {
+        <p>Property Value : @product.ProductProperties.FirstOrDefault(u=>u.Key == selectedProp).Value</p>
+    }
+    <br />
+</div>
+    
+</div>
+
+@code {
+    //here we can write c#
+    private string selectedProp = "";
+
+    Demo_Product product = new Models.LearnBlazorModels.Demo_Product()
+        {
+            Id = 1,
+            Name = "Rose Candle",
+            Price = 10.99,
+            IsActive = true,
+            ProductProperties = new List<Models.LearnBlazorModels.Demo_ProductProp>()
+            {
+                new Models.LearnBlazorModels.Demo_ProductProp { Id = 1, Key="Color", Value="Black"},
+                new Models.LearnBlazorModels.Demo_ProductProp { Id = 2, Key="Flavor", Value="Rose Jasmine"},
+                new Models.LearnBlazorModels.Demo_ProductProp { Id = 3, Key="Size", Value="20oz"},
+            }
+        };
+
+}

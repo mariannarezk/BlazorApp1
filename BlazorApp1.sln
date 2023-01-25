@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1", "BlazorApp1\Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Client", "Web_Client\Web_Client.csproj", "{99FFC303-BA20-4ABB-8523-D2C584D4689B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{F6BC4B66-0CAC-494A-8916-93A3E1CD5371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{F6BC4B66-0CAC-494A-8916-93A3E1CD5371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

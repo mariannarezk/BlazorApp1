@@ -1,22 +1,10 @@
 ﻿@page "/learnBlazor/democomponent"
 <h3>DemoComponent</h3>
 <div class="row">
+    <p>Favorites Total : @SelectedFavoriteCount</p>
     @foreach(var item in products)
     {
-        <div class="col-6">
-            <h2>Product @item.Id</h2>
-            Name - @item.Name <br>
-            show Properties <input type="checkbox" class="form-check" @bind="@item.IsActive" @bind:event="oninput" />
-            @if (item.IsActive)
-            {
-                @foreach(var subitem in item.ProductProperties)
-                {
-                  <p>  @subitem.Key - @subitem.Value <br /></p>
-                }
-            }
-            <input type="button" class="btn btn-danger" value="Delete">
-            <input type="button" class="btn btn-success" value="Update">
-        </div>
+        <_SingleProduct Product="@item" OnFavoriteSelection="FavoriteCountUpdate"></_SingleProduct>
     }
 </div>
 
@@ -24,7 +12,7 @@
 
 @code {
     List<Demo_Product> products = new();
-
+    private int SelectedFavoriteCount { get; set; } = 0;
     protected override void OnInitialized()
     {
         products.Add(new()
@@ -54,5 +42,19 @@
                 new Demo_ProductProp {Id = 3,Key = "Color",Value = "White"}
             }
             });
+    }
+
+    protected void FavoriteCountUpdate(bool isSelected)
+    {
+        //   SelectedFavoriteCount = isSelected ? SelectedFavoriteCount++ : SelectedFavoriteCount--;
+        if (isSelected)
+        {
+            SelectedFavoriteCount++;
+        }
+        else
+        {
+            SelectedFavoriteCount--;
+        }
+
     }
 }

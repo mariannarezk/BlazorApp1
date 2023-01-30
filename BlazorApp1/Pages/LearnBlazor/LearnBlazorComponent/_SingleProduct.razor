@@ -2,7 +2,8 @@
     <h2>Product @Product.Id</h2>
     <input type="checkbox" @onchange="FavoriteUpdated"/> Add To Favorite <br />
     <br />
-    Name - @Product.Name <br>
+    <h4 @onclick="()=>LastSelected(Product.Name)">Name - @Product.Name</h4> <br>
+     <h5>RF From Parent - @FirstFr @SecondFr</h5>
     show Properties <input type="checkbox" class="form-check" @bind="@Product.IsActive" @bind:event="oninput" />
     @if (Product.IsActive)
     {
@@ -23,11 +24,23 @@
     public Demo_Product Product { get; set; }
 
     [Parameter]
+    public RenderFragment FirstFr { get; set; }
+    [Parameter]
+    public RenderFragment SecondFr { get; set; }
+
+    [Parameter]
     public EventCallback<bool> OnFavoriteSelection { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnLastSelection{ get; set; }
 
     private async Task FavoriteUpdated(ChangeEventArgs e)
     {
         await OnFavoriteSelection.InvokeAsync((bool)e.Value);    
+    }
+    private async Task LastSelected(string name)
+    {
+        await OnLastSelection.InvokeAsync(name);
     }
 
 }
